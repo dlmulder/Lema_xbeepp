@@ -110,7 +110,7 @@ void XbeeFrameCommandResponse::print()
         switch (getReturnType())
         {
         case rt::NONE:
-            ss << "no value" << (unsigned int)getByteValue();
+            ss << "no value";// << (unsigned int)getByteValue();
             break;
         case rt::BYTE:
             ss << " Value(byte):" << (unsigned int)getByteValue();

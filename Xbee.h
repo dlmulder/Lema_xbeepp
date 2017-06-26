@@ -28,6 +28,7 @@ class Xbee
         virtual bool isInitialized() { return initialized; }
 
         void updateState();
+		bool areAllRequestsHandled();
 
         XbeeAddress& getAddress();
         XbeeAddress getDestinationAddress();
@@ -137,6 +138,7 @@ class Xbee
 
         XbeeCommand *lastCommand;
         XbeeCommandResponse *lastResponse;
+		bool allRequestsHandled;
 
         uint64_t waitforResponseWithCleanup();
         void waitforResponse();

@@ -37,6 +37,9 @@ void XbeeLocal::writeFrame(XbeeFrame &frame)
 void XbeeLocal::readFrameData(XbeeFrame::frame *buffer)
 {
 //    cout << "starting readFrameData" << endl;
+	if (stop)
+		return;
+
     lock_guard<mutex> blRd(mSerialRd);
     XbeeFrame::frame *header = reinterpret_cast<XbeeFrame::frame*>(buffer);
     port.wait4Char(XBEE_PACKET_START);
@@ -45,6 +48,9 @@ void XbeeLocal::readFrameData(XbeeFrame::frame *buffer)
 
     do
     {
+		if (stop)
+			return;
+
         port.readData(reinterpret_cast<uint8_t*>(&header->length_msb)+have, 3-have);
 
         if ((uint8_t)header->type == XBEE_PACKET_START)

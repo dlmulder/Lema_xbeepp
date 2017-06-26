@@ -15,11 +15,11 @@
 
 using namespace std;
 
-Xbee::Xbee():name(addr.toString()),valueAP(0),valueAO(0),valueCE(0),valueID(0),valueVR(0),valueHV(0),valuePR(0),valueIR(0),valueIC(0),valueDH(0),valueDL(0),portFunction{},digitalValue(0),analogValue{0},initialized(false),lastCommand(nullptr),lastResponse(nullptr)
+Xbee::Xbee():name(addr.toString()),valueAP(0),valueAO(0),valueCE(0),valueID(0),valueVR(0),valueHV(0),valuePR(0),valueIR(0),valueIC(0),valueDH(0),valueDL(0),portFunction{},digitalValue(0),analogValue{0},initialized(false),lastCommand(nullptr),lastResponse(nullptr),allRequestsHandled(false)
 {
 }
 
-Xbee::Xbee(XbeeAddress &_addr):addr(_addr),name(_addr.toString()),valueAP(0),valueAO(0),valueCE(0),valueID(0),valueVR(0),valueHV(0),valuePR(0),valueIR(0),valueIC(0),valueDH(0),valueDL(0),portFunction{},digitalValue(0),analogValue{0},initialized(false),lastCommand(nullptr),lastResponse(nullptr)
+Xbee::Xbee(XbeeAddress &_addr):addr(_addr),name(_addr.toString()),valueAP(0),valueAO(0),valueCE(0),valueID(0),valueVR(0),valueHV(0),valuePR(0),valueIR(0),valueIC(0),valueDH(0),valueDL(0),portFunction{},digitalValue(0),analogValue{0},initialized(false),lastCommand(nullptr),lastResponse(nullptr),allRequestsHandled(false)
 {
 }
 
@@ -134,21 +134,23 @@ string Xbee::getNetRoleString()
 
 xbeeNetRole Xbee::getNetRole()
 {
-    uint8_t mod = valueVR/0x100;
-
-    switch (mod)
-    {
-    case 0x21:
-        return xbeeNetRole::Coordinator;
-    case 0x23:
-        return xbeeNetRole::Router;
-    case 0x29:
-        return xbeeNetRole::EndDevice;
-    }
-
-    if (getHWVersion() == xbeeVersion::S2C || getHWVersion() == xbeeVersion::S2CPro)
-        return valueCE?xbeeNetRole::Coordinator:xbeeNetRole::Router;
-
+//    uint8_t mod = valueVR/0x100;
+//
+//    switch (mod)
+//    {
+//    case 0x21:
+//        return xbeeNetRole::Coordinator;
+//    case 0x23:
+//        return xbeeNetRole::Router;
+//    case 0x29:
+//        return xbeeNetRole::EndDevice;
+//    }
+//
+//    if (getHWVersion() == xbeeVersion::S3B ||
+//		getHWVersion() == xbeeVersion::S2C ||
+//		getHWVersion() == xbeeVersion::S2CPro)
+//        return valueCE?xbeeNetRole::Coordinator:xbeeNetRole::Router;
+//
     return xbeeNetRole::Unknown;
 }
 
@@ -169,6 +171,8 @@ xbeeVersion Xbee::getHWVersion()
     case 0x2e:
     case 0x30:
         return xbeeVersion::S2C;
+    case 0x23:
+        return xbeeVersion::S3B;
     }
 
     return xbeeVersion::Unknown;
@@ -205,6 +209,8 @@ std::string Xbee::getHWType()
     case 0x2e:
     case 0x30:
         return "S2C";
+    case 0x23:
+        return "S3B";
     }
 
     return "XX";
@@ -212,6 +218,7 @@ std::string Xbee::getHWType()
 
 void Xbee::initialize()
 {
+	allRequestsHandled = false;
     try
     {
         updateState();
@@ -285,6 +292,11 @@ void Xbee::updateState()
     updatePortConfig(XBEE_CMD_D8, pt::D8);*/
 }
 
+bool Xbee::areAllRequestsHandled()
+{
+	return allRequestsHandled;
+}
+
 void Xbee::updatePortConfig(XbeePort::pinID p)
 {
     try
@@ -308,6 +320,9 @@ void Xbee::callHandler(uint8_t frmId, XbeeCommandResponse &resp)
         hnd.cb(this, hnd.cmd, resp);
 
         callbackHandlers.erase(frmId);
+		
+		if (callbackHandlers.empty())
+			allRequestsHandled = true;
     }
 }
 
@@ -479,7 +494,7 @@ bool Xbee::setValueByCommand(XbeeCommand &cmd, XbeeCommandResponse &resp)
 
     if (cmd.getCommand() == XBEE_CMD_ID)
     {
-        setValueID(resp.getLongValue());
+        setValueID(resp.getShortValue());
         return true;
     }
 

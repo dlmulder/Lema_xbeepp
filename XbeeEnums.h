@@ -7,7 +7,7 @@ extern "C" {
 #endif
 
     enum class xbeeVersion {
-		Unknown, S2, S2Pro, S2C, S2CPro
+		Unknown, S2, S2Pro, S2C, S2CPro, S3B
     };
     enum class xbeeNetRole {
 		Unknown, Coordinator, Router, EndDevice

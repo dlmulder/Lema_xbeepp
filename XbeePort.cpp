@@ -91,7 +91,6 @@ vector<XbeePort::pinID> XbeePort::getPins(xbeeVersion hv)
         pins.push_back(pinID::P8);
         pins.push_back(pinID::P9);
         pins.push_back(pinID::D8);
-    default:
     case xbeeVersion::S2:
     case xbeeVersion::S2Pro:
         pins.push_back(pinID::P0);
@@ -105,6 +104,18 @@ vector<XbeePort::pinID> XbeePort::getPins(xbeeVersion hv)
         pins.push_back(pinID::D5);
         pins.push_back(pinID::D6);
         pins.push_back(pinID::D7);
+		break;
+    default:
+    case xbeeVersion::S3B:
+        pins.push_back(pinID::P0);
+        pins.push_back(pinID::P1);
+        pins.push_back(pinID::P2);
+        pins.push_back(pinID::D0);
+        pins.push_back(pinID::D1);
+        pins.push_back(pinID::D2);
+        pins.push_back(pinID::D3);
+        pins.push_back(pinID::D4);
+		break;
     }
 
 

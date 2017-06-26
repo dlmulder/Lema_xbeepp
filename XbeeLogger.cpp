@@ -1,5 +1,4 @@
 #include "XbeeLogger.h"
-#include "../andamCommon/include/timeUtils.h"
 
 #include <iostream>
 //#include <chrono>
@@ -26,7 +25,7 @@ void XbeeLogger::doLog(const string &msg, Severity severity, const string &origi
     uint8_t sev = static_cast<uint8_t>(severity);
     if (severity <= sevLimit && sev >= 0 && sev <= 3)
     {
-        cout << getTimestampString() << ": " << SeverityLabel[sev] << " (" << origin << ")" << ":" << msg << endl;
+        cout /*<< getTimestampString()*/ << ": " << SeverityLabel[sev] << " (" << origin << ")" << ":" << msg << endl;
     }
 }
 

@@ -47,22 +47,14 @@ int main(int argc, char *argv[])
 
     XbeeLocal xbee;
 
-    xbee.getSerialPort().setDeviceName("/dev/ttyUSB0");
-    xbee.getSerialPort().setBaudrate(B115200);
+    xbee.getSerialPort().setDeviceName("/tmp/ttyUSB1");
+    xbee.getSerialPort().setBaudrate(B57600);
 
     TestDiscover discover;
     xbee.addDiscoveryListener(&discover);
 
     typedef XbeePort::pinID pt;
     typedef XbeePort::pinFunction pf;
-
-    try
-    {
-        xbee.configurePortFunction(pt::D0, pf::DigitalInput);
-        log.doLog("TEST - this should not be visible, Xbee not initialized and exception should be thrown", XbeeLogger::Severity::Error, "main");
-    } catch (XbeeException &ex) {
-        log.doLog("TEST - exception is thrown when tried to call a function on noninitialized Xbee", XbeeLogger::Severity::Info, "main");
-    }
 
     try
     {
@@ -82,22 +74,7 @@ int main(int argc, char *argv[])
     log.doLog(string("Name:") + xbee.getName(), XbeeLogger::Severity::Info, "main");
     log.doLog(string("Role:") + xbee.getNetRoleString(), XbeeLogger::Severity::Info, "main");
 
-    xbee.configurePortFunction(pt::D0, pf::DigitalInput);
-    xbee.configurePortFunction(pt::D1, pf::DigitalOutputLow);
-    xbee.configurePortFunction(pt::D2, pf::DigitalOutputHigh);
-
-    try
-    {
-        xbee.configurePortFunction(pt::P0, pf::AnalogInput);
-        log.doLog("TEST - this should not be visible, P0 cannot be set as Analog input", XbeeLogger::Severity::Error, "main");
-    } catch (XbeeException &ex) {
-        log.doLog(string("TEST - P0 cannot be set as Analog input ") + ex.what(), XbeeLogger::Severity::Info, "main");
-    }
-
     log.doLog("configured", XbeeLogger::Severity::Info, "main");
-
-
-    auto devs = xbee.getDiscoveredDevices();
 
     log.doLog("local Xbee", XbeeLogger::Severity::Info, "main");
 
@@ -109,6 +86,24 @@ int main(int argc, char *argv[])
 
     try
     {
+	    std::vector<XbeeRemote*> &devs = xbee.getDiscoveredDevices();
+		while(devs.empty())
+			sleep(3);
+		while(1)
+		{
+			int numXbees = devs.size();
+			bool allRequestsAreHandled = true;
+			for(int i = 0; i < numXbees; ++i)
+			{
+				if(! devs[i]->areAllRequestsHandled())
+					allRequestsAreHandled = false;
+			}
+			if(! allRequestsAreHandled)
+				sleep(3);
+			else
+				break;
+		}
+
         for (auto it=devs.begin(); it!=devs.end();it++)
         {
             stringstream ss;
@@ -118,17 +113,6 @@ int main(int argc, char *argv[])
             log.doLog(ss.str(), XbeeLogger::Severity::Info, "main");
 
             log.doLog(string("Role:") + (*it)->getNetRoleString(), XbeeLogger::Severity::Info, "main");
-
-            ss.clear();
-            ss.str(string());
-            ss << getTime() << ":sending remote AT cmd";
-            log.doLog(ss.str(), XbeeLogger::Severity::Info, "main");
-            (*it)->configurePortFunction(pt::D1, pf::DigitalOutputLow);
-            (*it)->configurePortFunction(pt::D2, pf::DigitalOutputHigh);
-            ss.clear();
-            ss.str(string());
-            ss << getTime() << ":remote AT cmd sent";
-            log.doLog(ss.str(), XbeeLogger::Severity::Info, "main");
         }
     } catch (XbeeException &ex) {
         log.doLog(string("remote xbee config exception:") + ex.what(), XbeeLogger::Severity::Error, "main");
