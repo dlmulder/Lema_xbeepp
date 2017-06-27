@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="xbeepp_NetBeans"
+                   displayName="xbeepp_NetBeans"
+                   projectFiles="true">
+      <itemPath>.dep.inc</itemPath>
+      <itemPath>LICENSE</itemPath>
+      <itemPath>Makefile</itemPath>
+      <itemPath>README.md</itemPath>
+      <itemPath>SerialPort.cpp</itemPath>
+      <itemPath>SerialPort.h</itemPath>
+      <itemPath>Xbee.cpp</itemPath>
+      <itemPath>Xbee.h</itemPath>
+      <itemPath>XbeeAddress.cpp</itemPath>
+      <itemPath>XbeeAddress.h</itemPath>
+      <itemPath>XbeeCommand.cpp</itemPath>
+      <itemPath>XbeeCommand.h</itemPath>
+      <itemPath>XbeeCommandException.cpp</itemPath>
+      <itemPath>XbeeCommandException.h</itemPath>
+      <itemPath>XbeeCommandResponse.cpp</itemPath>
+      <itemPath>XbeeCommandResponse.h</itemPath>
+      <itemPath>XbeeCommandResponseImpl.cpp</itemPath>
+      <itemPath>XbeeCommandResponseImpl.h</itemPath>
+      <itemPath>XbeeDiscoveryListener.h</itemPath>
+      <itemPath>XbeeEnums.h</itemPath>
+      <itemPath>XbeeException.cpp</itemPath>
+      <itemPath>XbeeException.h</itemPath>
+      <itemPath>XbeeFrame.cpp</itemPath>
+      <itemPath>XbeeFrame.h</itemPath>
+      <itemPath>XbeeFrameCommand.cpp</itemPath>
+      <itemPath>XbeeFrameCommand.h</itemPath>
+      <itemPath>XbeeFrameCommandResponse.cpp</itemPath>
+      <itemPath>XbeeFrameCommandResponse.h</itemPath>
+      <itemPath>XbeeFrameDataSample.cpp</itemPath>
+      <itemPath>XbeeFrameDataSample.h</itemPath>
+      <itemPath>XbeeFrameDiscovery.cpp</itemPath>
+      <itemPath>XbeeFrameDiscovery.h</itemPath>
+      <itemPath>XbeeFrameRemoteCommand.cpp</itemPath>
+      <itemPath>XbeeFrameRemoteCommand.h</itemPath>
+      <itemPath>XbeeFrameRemoteCommandResponse.cpp</itemPath>
+      <itemPath>XbeeFrameRemoteCommandResponse.h</itemPath>
+      <itemPath>XbeeLocal.cpp</itemPath>
+      <itemPath>XbeeLocal.h</itemPath>
+      <itemPath>XbeeLogger.cpp</itemPath>
+      <itemPath>XbeeLogger.h</itemPath>
+      <itemPath>XbeePort.cpp</itemPath>
+      <itemPath>XbeePort.h</itemPath>
+      <itemPath>XbeeRemote.cpp</itemPath>
+      <itemPath>XbeeRemote.h</itemPath>
+      <itemPath>test.cpp</itemPath>
+      <itemPath>utils.cpp</itemPath>
+      <itemPath>utils.h</itemPath>
+      <itemPath>xbee2.cbp</itemPath>
+      <itemPath>xbee2.depend</itemPath>
+      <itemPath>xbee2.layout</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <standard>8</standard>
+          <commandLine>-pthread</commandLine>
+        </ccTool>
+      </compileType>
+      <item path=".dep.inc" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="LICENSE" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Makefile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="README.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SerialPort.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="SerialPort.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Xbee.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Xbee.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeAddress.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeAddress.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeCommand.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeCommand.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeCommandException.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeCommandException.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeCommandResponse.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeCommandResponse.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeCommandResponseImpl.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeCommandResponseImpl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeDiscoveryListener.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeEnums.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeException.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeException.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrame.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrame.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrameCommand.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrameCommand.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrameCommandResponse.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrameCommandResponse.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrameDataSample.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrameDataSample.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrameDiscovery.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrameDiscovery.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrameRemoteCommand.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrameRemoteCommand.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrameRemoteCommandResponse.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrameRemoteCommandResponse.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeLocal.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeLocal.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeLogger.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeLogger.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeePort.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeePort.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeRemote.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeRemote.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="utils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="utils.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="xbee2.cbp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="xbee2.depend" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="xbee2.layout" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <standard>8</standard>
+          <commandLine>-pthread</commandLine>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path=".dep.inc" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="LICENSE" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Makefile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="README.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SerialPort.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="SerialPort.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Xbee.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Xbee.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeAddress.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeAddress.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeCommand.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeCommand.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeCommandException.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeCommandException.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeCommandResponse.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeCommandResponse.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeCommandResponseImpl.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeCommandResponseImpl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeDiscoveryListener.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeEnums.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeException.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeException.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrame.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrame.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrameCommand.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrameCommand.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrameCommandResponse.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrameCommandResponse.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrameDataSample.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrameDataSample.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrameDiscovery.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrameDiscovery.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrameRemoteCommand.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrameRemoteCommand.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeFrameRemoteCommandResponse.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeFrameRemoteCommandResponse.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeLocal.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeLocal.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeLogger.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeLogger.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeePort.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeePort.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="XbeeRemote.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="XbeeRemote.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="utils.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="utils.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="xbee2.cbp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="xbee2.depend" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="xbee2.layout" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
