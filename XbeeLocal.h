@@ -44,7 +44,7 @@ class XbeeLocal:public Xbee
         static void* reader(void *arg);
 //        void readerM();
 
-        void readFrameData(XbeeFrame::frame *buffer);
+        bool readFrameData(XbeeFrame::frame &buffer);
 
         void writeFrame(XbeeFrame &frame);
 
@@ -69,9 +69,9 @@ class XbeeLocal:public Xbee
         uint8_t lastFrame;
 
         pthread_t thReader;
-        bool stop, doRemoteInit;
+        bool doRemoteInit;
 
-        void readAndProcessFrames();
+        bool readAndProcessFrames();
 
         std::vector<XbeeRemote*> discovered;
         std::vector<XbeeDiscoveryListener*> discoveryListeners;

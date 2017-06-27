@@ -17,7 +17,7 @@
 
 using namespace std;
 
-XbeeLocal::XbeeLocal():lastFrame(0),stop(false),doRemoteInit(false)
+XbeeLocal::XbeeLocal():lastFrame(0),doRemoteInit(false)
 {
     thReader = PTHREAD_ONCE_INIT;
 }
@@ -34,87 +34,77 @@ void XbeeLocal::writeFrame(XbeeFrame &frame)
     frame.print();
 }
 
-void XbeeLocal::readFrameData(XbeeFrame::frame *buffer)
+bool XbeeLocal::readFrameData(XbeeFrame::frame &header)
 {
 //    cout << "starting readFrameData" << endl;
-	if (stop)
-		return;
 
     lock_guard<mutex> blRd(mSerialRd);
-    XbeeFrame::frame *header = reinterpret_cast<XbeeFrame::frame*>(buffer);
+
     port.wait4Char(XBEE_PACKET_START);
+	if (! port.isOpen())
+		return false;
 
     uint8_t have=0;
 
     do
     {
-		if (stop)
-			return;
+        port.readData(reinterpret_cast<uint8_t*>(&header.length_msb)+have, 3-have);
+		if (! port.isOpen())
+			return false;
 
-        port.readData(reinterpret_cast<uint8_t*>(&header->length_msb)+have, 3-have);
-
-        if ((uint8_t)header->type == XBEE_PACKET_START)
+        if ((uint8_t)header.type == XBEE_PACKET_START)
         {
             have = 0;
             continue;
         }
 
-        if (header->length_msb == XBEE_PACKET_START)
+        if (header.length_msb == XBEE_PACKET_START)
         {
-            header->length_msb = header->length_lsb;
-            header->length_lsb = static_cast<uint8_t>(header->type);
+            header.length_msb = header.length_lsb;
+            header.length_lsb = static_cast<uint8_t>(header.type);
             have = 2;
         }
     } while(have == 3);
 
-    port.readData(header->data, XbeeFrame::getDataSize(*header));
+    port.readData(header.data, XbeeFrame::getDataSize(header));
+
+	return port.isOpen();
 }
 
-void XbeeLocal::readAndProcessFrames()
+bool XbeeLocal::readAndProcessFrames()
 {
     try
     {
         XbeeFrame::frame buffer;
 
-        readFrameData(&buffer);
-
-        if (stop)
-            return;
+        if (! readFrameData(buffer))
+            return false;
 
         XbeeFrame *f = XbeeFrame::createFrame(&buffer);
 
-        if (stop)
-            return;
-
         f->validate();
-
-        if (stop)
-            return;
 
         processFrame(f);
 
-        if (stop)
-            return;
-
         delete f;
-    } catch (exception &ex)
+    }
+	catch (exception &ex)
     {
         XbeeLogger::GetInstance().doLog(string("reader:") + ex.what(), XbeeLogger::Severity::Error, "XbeeLocal");
     }
+	
+	return true;
 }
 
 void* XbeeLocal::reader(void *arg)
 {
     XbeeLocal *xbee = static_cast<XbeeLocal*>(arg);
 
-    usleep(1000000);
+    while(xbee->readAndProcessFrames())
+		;
 
-    while(!xbee->stop)
-    {
-        xbee->readAndProcessFrames();
-    }
-
-    XbeeLogger::GetInstance().doLog("xbee reader thread stopped", xbee->stop?(XbeeLogger::Severity::Info):(XbeeLogger::Severity::Error), "XbeeLocal");
+    //XbeeLogger::GetInstance().doLog("xbee reader thread stopped", xbee->stop?(XbeeLogger::Severity::Info):(XbeeLogger::Severity::Error), "XbeeLocal");
+	XbeeLogger::GetInstance().doLog("xbee reader thread stopped", (XbeeLogger::Severity::Info), "XbeeLocal");
 
     return NULL;
 }
@@ -250,7 +240,6 @@ void XbeeLocal::initialize()
 
 void XbeeLocal::uninit()
 {
-    stop = true;
     port.uninitialize();
     pthread_join(thReader, NULL);
 }
@@ -332,14 +321,15 @@ void XbeeLocal::readLocalResponseFrameData(XbeeFrameCommandResponse &resp)
 {
     int i=5;
 
+	bool success;
     do
     {
-        readFrameData(&resp.frm);
+        success = readFrameData(resp.frm);
 
-        if (resp.getType() != XbeeFrame::XbeeApiType::AT_RESPONSE)
+        if (success && (resp.getType() != XbeeFrame::XbeeApiType::AT_RESPONSE))
             XbeeLogger::GetInstance().doLog("dropping frame of type " + resp.getTypeName(), XbeeLogger::Severity::Info, "XbeeLocal");
 
-    } while (i-- && resp.getType() != XbeeFrame::XbeeApiType::AT_RESPONSE);
+    } while (success && i-- && resp.getType() != XbeeFrame::XbeeApiType::AT_RESPONSE);
 
 }
 

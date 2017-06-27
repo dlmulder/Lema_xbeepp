@@ -141,8 +141,9 @@ void SerialPort::uninitialize()
 {
     if (fd >= 0)
     {
-        close(fd);
-        fd = -1;
+		int temp = fd;
+		fd = -1;
+        close(temp);
     }
 }
 
